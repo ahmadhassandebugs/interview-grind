@@ -31,7 +31,6 @@ class HashMap:
     
   def insert(self, key, value):
     key_hash = self.__hash(key)
-    print(key_hash)
     if self.container[key_hash] is None:
       self.container[key_hash] = Node(key, value)
       self.n += 1
