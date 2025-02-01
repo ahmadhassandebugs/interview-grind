@@ -1,4 +1,5 @@
 ##### Hash Map (Table) #####
+# Functions:
 # 1. insert(key,value) O(1)
 # 2. remove(key) O(1)
 # 3. access(key) O(1)
