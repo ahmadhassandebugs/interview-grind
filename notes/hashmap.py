@@ -6,6 +6,11 @@
 # 5. print() O(n)
 # 6. length() O(n)
 
+### Takeaways ###
+# It's better to traverse using current not (i.e., while cur:)
+# If some node is to be removed, just maintain a second
+#   previous pointer.
+
 # we can maintain a dynamic array of linked list for this
 #   any decent hash function should work
 #   the dynamic array will contain head of the llist
@@ -37,7 +42,7 @@ class HashMap:
       return
     
     cur = self.container[key_hash]
-    while cur.next:
+    while cur:
       if cur.key == key:
         cur.value = value
         return
@@ -49,33 +54,27 @@ class HashMap:
     self.n += 1
       
   def remove(self, key):
-    key_hash = self.__hash(key)
-    if self.container[key_hash] is None:
-      return None
-      
+    key_hash = self.__hash(key)      
+    prev = None
     cur = self.container[key_hash]
-    if cur.next is None:  # one element
-      if cur.key == key:
-        self.container[key_hash] = None
-        self.n -= 1
-        return
         
-    while cur.next and cur.next.next:
-      if cur.next.key == key:
-        cur.next = cur.next.next
+    while cur:
+      if cur.key == key:
+        if prev:          
+          prev.next = cur.next
+        else:
+          self.container[key_hash] = cur.next
         self.n -= 1
         return
+      prev = cur
       cur = cur.next
     
     return None
   
   def access(self, key):
     key_hash = self.__hash(key)
-    if self.container[key_hash] is None:
-      return None
-      
     cur = self.container[key_hash]
-    while cur.next:
+    while cur:
       if cur.key == key:
         return cur.value
       cur = cur.next
@@ -83,14 +82,11 @@ class HashMap:
     return None
   
   def search(self, value):
-    for i in range(self.capacity):
-      if self.container[i] is not None:
-        cur = self.container[i]
-        while cur.next:
-          if cur.value == value:
-            return cur.key
-          cur = cur.next
-  
+    for _, node in enumerate(self.container):
+      while node:
+        if node.value == value:
+          return node.key
+        node = node.next
     return None
   
   def __hash(self, key):
@@ -101,17 +97,15 @@ class HashMap:
   
   def __str__(self):
     result = ""
-    for i in range(self.capacity):
-      result += f"idx=[{i}] {self.__get_llist_str(i)}\n"
-    return result
-      
-  def __get_llist_str(self, idx):
-    cur = self.container[idx]
-    if cur is None: return ""
-    result = ""
-    while cur.next:
-      result += f"{cur.key}:{cur.value}->"
-      cur = cur.next
+    for i, node in enumerate(self.container):
+      if node is None:
+        continue
+      result += f"Bucket {i}: "
+      cur = node
+      while cur:
+        result += f"({cur.key}, {cur.value})->"
+        cur = cur.next
+      result += f"NULL "
     return result
 
 
@@ -120,7 +114,6 @@ if __name__=="__main__":
   
   # Test insert
   hash_map.insert(1, 'one')
-  print(hash_map)  # Expected: 1:one->
   hash_map.insert(2, 'two')
   hash_map.insert(3, 'three')
   print(hash_map)  # Expected: 1:one-> 2:two-> 3:three->

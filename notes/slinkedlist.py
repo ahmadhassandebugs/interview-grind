@@ -12,7 +12,7 @@
 #### Takeaways ####
 # - Stop before the node when inserting at pos (use cur.next.next loop)
 # - Pay attention to empty and single node cases
-# - When traversing, use cur.next in loop 
+# - When traversing, use cur.next in loop [[NO USE cur]]
 
 # create a Node class to take care of each node and keep track of
 #   head bc the actual head node can change between objects
@@ -28,12 +28,12 @@ class LinkedList:
   def __init__(self):
     self.head = None
     
-  def insertAtBegin(self, x):
+  def insert_at_begin(self, x):
     node = Node(x)
     node.next = self.head
     self.head = node
   
-  def insertAtEnd(self, x):
+  def insert_at_end(self, x):
     node = Node(x)
     if self.head is None:
       self.insertAtBegin(x)
@@ -44,7 +44,7 @@ class LinkedList:
       cur = cur.next
     cur.next = node
   
-  def insertAtIndex(self, x, pos):
+  def insert_at_index(self, x, pos):
     node = Node(x)
 
     if self.head is None:
@@ -65,11 +65,11 @@ class LinkedList:
     else:
       print("Pos not found", pos)
   
-  def deleteFirst(self):
+  def delete_first(self):
     if self.head is None: return
     self.head = self.head.next
   
-  def deleteLast(self):
+  def delete_last(self):
     if self.head is None: return
     if self.head.next is None: self.deleteFirst()
     
@@ -78,7 +78,7 @@ class LinkedList:
       cur = cur.next
     cur.next = None
   
-  def deleteElement(self, x):
+  def delete_element(self, x):
     if self.head is None: return
     if self.head.next is None and self.head.data == x: self.deleteFirst()
     
@@ -111,16 +111,16 @@ class LinkedList:
 if __name__=="__main__":
   llist = LinkedList()
   # add nodes to the linked list
-  llist.insertAtEnd('a')
-  llist.insertAtEnd('b')
-  llist.insertAtBegin('c')
-  llist.insertAtEnd('d')
-  llist.insertAtIndex('g', 2)
+  llist.insert_at_end('a')
+  llist.insert_at_end('b')
+  llist.insert_at_begin('c')
+  llist.insert_at_end('d')
+  llist.insert_at_index('g', 2)
   print("c->a->g->b->d->NULL vs.", llist)
   # remove nodes
-  llist.deleteLast()
+  llist.delete_last()
   print("c->a->g->b->NULL vs.", llist)
-  llist.deleteElement("g")
+  llist.delete_element("g")
   print("c->a->b->NULL vs.", llist)
-  llist.deleteFirst()
+  llist.delete_first()
   print("a->b->NULL vs.", llist)
