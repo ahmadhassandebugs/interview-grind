@@ -10,9 +10,9 @@
 # 8. print() O(n)
 
 #### Takeaways ####
-# - Stop before the node when inserting at pos (use cur.next.next loop)
-# - Pay attention to empty and single node cases
-# - When traversing, use cur.next in loop [[NO USE cur]]
+# still struggling with insert at index and delete at index/element
+#   since you're using cur.next condition, you should check for first
+#   node separately or use cur condition and a prev node pointer
 
 # create a Node class to take care of each node and keep track of
 #   head bc the actual head node can change between objects
@@ -34,93 +34,118 @@ class LinkedList:
     self.head = node
   
   def insert_at_end(self, x):
-    node = Node(x)
-    if self.head is None:
-      self.insertAtBegin(x)
-      return
-  
+    if not self.head:
+      self.head = Node(x)
     cur = self.head
     while cur.next:
       cur = cur.next
-    cur.next = node
+    cur.next = Node(x)
   
   def insert_at_index(self, x, pos):
-    node = Node(x)
-
-    if self.head is None:
+    if not self.head:
       if pos == 0:
-        self.insertAtBegin(x)
+        self.head = Node(x)
+        return
       else:
-        print("Pos not found")
+        return KeyError("Pos not found")
+    if pos == 0:
+      self.insert_at_begin(x)
       return
-
-    # [Mistake] tend to make mistakes with counter (stop before the pos)
-    cur, pos = self.head, pos-1  
+    cur, pos = self.head, pos-1
     while cur.next and pos > 0:
       cur, pos = cur.next, pos-1
     if pos == 0:
-      node_after_pos = cur.next
+      node = Node(x)
+      node.next = cur.next
       cur.next = node
-      node.next = node_after_pos
     else:
-      print("Pos not found", pos)
-  
+      return KeyError("Pos not found")
+
   def delete_first(self):
-    if self.head is None: return
-    self.head = self.head.next
+    if self.head:
+      self.head = self.head.next
   
   def delete_last(self):
-    if self.head is None: return
-    if self.head.next is None: self.deleteFirst()
-    
+    if not self.head:
+      return KeyError("Cannot delete from empty list")
+    if not self.head.next:
+      self.head = None
     cur = self.head
-    while cur.next and cur.next.next:
+    while cur.next.next:
       cur = cur.next
     cur.next = None
   
   def delete_element(self, x):
-    if self.head is None: return
-    if self.head.next is None and self.head.data == x: self.deleteFirst()
-    
+    if not self.head:
+      return KeyError("Cannot delete from empty list")
+    if not self.head.next:
+      if x == self.head.data:
+        self.head = None
+      else:
+        return KeyError("Cannot find the element")
+      
+    if x == self.head.data:
+      self.delete_first()
+      return
+      
     cur = self.head
-    while cur.next and cur.next.next and cur.next.data != x:
+    while cur.next:
+      if x == cur.next.data:
+        cur.next = cur.next.next
+        return
       cur = cur.next
-    if cur.next.data == x:
-      cur.next = cur.next.next
-    else:
-      print("ele not found")
+    
+    return KeyError("Cannot find the element")
   
   def __len__(self):
-    if self.head is None: return 0
     cur, count = self.head, 0
-    while cur.next:
+    while cur:
       cur, count = cur.next, count+1
     return count
   
   def __str__(self):
-    result = ""
-    if self.head is None: return ""
-    cur = self.head
-    while cur.next:
-      result += f"{cur.data}->"
-      cur = cur.next
-    result += f"{cur.data}->"
-    return f"{result}NULL"
-
+    cur, result = self.head, ""
+    while cur:
+      cur, result = cur.next, f"{result}->{cur.data}"
+    return f"{result}->None"
 
 if __name__=="__main__":
-  llist = LinkedList()
-  # add nodes to the linked list
-  llist.insert_at_end('a')
-  llist.insert_at_end('b')
-  llist.insert_at_begin('c')
-  llist.insert_at_end('d')
-  llist.insert_at_index('g', 2)
-  print("c->a->g->b->d->NULL vs.", llist)
-  # remove nodes
-  llist.delete_last()
-  print("c->a->g->b->NULL vs.", llist)
-  llist.delete_element("g")
-  print("c->a->b->NULL vs.", llist)
-  llist.delete_first()
-  print("a->b->NULL vs.", llist)
+  ll = LinkedList()
+  
+  # Test insert_at_begin
+  ll.insert_at_begin(10)
+  print(ll)  # Expected: ->10->None
+  ll.insert_at_begin(20)
+  print(ll)  # Expected: ->20->10->None
+  
+  # Test insert_at_end
+  ll.insert_at_end(30)
+  print(ll)  # Expected: ->20->10->30->None
+  ll.insert_at_end(40)
+  print(ll)  # Expected: ->20->10->30->40->None
+  
+  # Test insert_at_index
+  ll.insert_at_index(25, 2)
+  print(ll)  # Expected: ->20->10->25->30->40->None
+  ll.insert_at_index(5, 0)
+  print(ll)  # Expected: ->5->20->10->25->30->40->None
+  
+  # Test delete_first
+  ll.delete_first()
+  print(ll)  # Expected: ->20->10->25->30->40->None
+  
+  # Test delete_last
+  ll.delete_last()
+  print(ll)  # Expected: ->20->10->25->30->None
+  
+  # Test delete_element
+  ll.delete_element(25)
+  print(ll)  # Expected: ->20->10->30->None
+  ll.delete_element(20)
+  print(ll)  # Expected: ->10->30->None
+  
+  # Test __len__
+  print(len(ll))  # Expected: 2
+  
+  # Test __str__
+  print(ll)  # Expected: ->10->30->None
