@@ -109,8 +109,27 @@ def merge_sort_v2(nums):
 
 def quick_sort(nums):
     # cache efficient
-    pass
-
+    
+    def divide_conquer(arr):
+        # base case
+        if len(arr) <= 1:
+            return arr
+        # choose pivot
+        pivot = arr[0]  # can have multiple same elements
+        # partition array
+        l_arr, r_arr = [], []
+        for i in range(1, len(arr)):
+            if arr[i] < pivot:
+                l_arr.append(arr[i])
+            else:
+                r_arr.append(arr[i])
+        # recursively apply to halves
+        sorted_l_arr = divide_conquer(l_arr)
+        sorted_r_arr = divide_conquer(r_arr)
+        return sorted_l_arr + [pivot] + sorted_r_arr
+    
+    return divide_conquer(nums)
+    
 def heap_sort(nums):
     # implement min-heap and max-heap
     pass
@@ -129,6 +148,6 @@ if __name__=="__main__":
         [6, 5, 4, 3, 2, 1]
     ]
     for test_case in test_cases:
-        ans = merge_sort_v2(test_case)
+        ans = quick_sort(test_case)
         print(ans)
         assert ans == sorted(test_case), f"original: {test_case} ours: {ans}"
