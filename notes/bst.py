@@ -9,6 +9,9 @@
 ### Takeaways ###
 # you don't know how to delete a node
 #   2 children case is tricky (inorder predecessor)
+#   queue: append() and pop(0), stack: append() and pop()
+# for dfs with stack, add the right node first (LIFO) so
+#   that left node is popped first
 
 class TreeNode:
   def __init__(self, value):
@@ -61,7 +64,7 @@ class TreeNode:
       self.left.postorder()
     if self.right:
       self.right.postorder()
-    print(self.value, sep=",")    
+    print(self.value, sep=",")
 
   def size(self):
     l_size, r_size = 0, 0
@@ -78,6 +81,28 @@ class TreeNode:
     if self.right:
       r_depth = self.right.depth()
     return 1 + max(l_depth, r_depth)
+
+def bfs(node):
+  queue = []
+  queue.append(node)
+  while len(queue) > 0:
+    current = queue.pop(0)
+    if current.left:
+      queue.append(current.left)
+    if current.right:
+      queue.append(current.right)
+    print(f"{current.value}->")
+
+def dfs(node):
+  stack = []
+  stack.append(node)
+  while len(stack) > 0:
+    current = stack.pop()
+    print(f"{current.value}->")
+    if current.right:
+      stack.append(current.right)
+    if current.left:
+      stack.append(current.left)
 
 if __name__=="__main__":
   # Create a binary search tree and insert values
@@ -113,3 +138,11 @@ if __name__=="__main__":
 
   # Test depth function
   print("Depth of the tree:", bst.depth())  # Should return 4
+  
+  # Test BFS traversal
+  print("BFS traversal:")
+  bfs(bst)  # Should print 10->5->15->3->7->12->18->1->4->6->
+
+  # Test DFS traversal
+  print("DFS traversal:")
+  dfs(bst)  # Should print 10->5->3->1->4->7->6->15->12->18->
