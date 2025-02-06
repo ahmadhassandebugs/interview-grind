@@ -7,7 +7,7 @@
 # 
 
 ### Takeaways ###
-#
+# counting sort: use array instead of dict since indices will be sorted
 
 
 def insertion_sort(nums):
