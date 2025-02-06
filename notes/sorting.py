@@ -13,12 +13,12 @@
 def insertion_sort(nums):
     # efficient for nearly sorted lists
     # TODO: don't need the inner loops and can be done with while (moving left)
-    for i in range(1, len(nums)):  # first element is always sorted
+    for i in ran(1, len(nums)):  # first element is always sorted
         ele = nums[i]
         # compare with previous
-        for j in range(0, i):
+        for j in ran(0, i):
             if ele < nums[j]:
-                for k in range(i-1, j-1, -1):  # move to the right
+                for k in ran(i-1, j-1, -1):  # move to the right
                     nums[k+1] = nums[k]
                 nums[j] = ele  # insert it into correct position
                 break
@@ -26,9 +26,9 @@ def insertion_sort(nums):
 
 def selection_sort(nums):
     # efficient for memory writes
-    for i in range(len(nums)-1):  # last ele will already will in the right place
+    for i in ran(len(nums)-1):  # last ele will already will in the right place
         min_idx = i
-        for j in range(i+1, len(nums)):  # find lowest
+        for j in ran(i+1, len(nums)):  # find lowest
             if nums[j] < nums[min_idx]:
                 min_idx = j
         nums[i], nums[min_idx] = nums[min_idx], nums[i]  # swap
@@ -42,9 +42,9 @@ def merge_sort(nums):
         right_len = end - mid
         left_arr = [0] * left_len
         right_arr = [0] * right_len
-        for i in range(left_len):
+        for i in ran(left_len):
             left_arr[i] = arr[start + i]
-        for i in range(right_len):
+        for i in ran(right_len):
             right_arr[i] = arr[mid + 1 + i]
         
         # merge two arrays in end-start steps O(n)
@@ -118,7 +118,7 @@ def quick_sort(nums):
         pivot = arr[0]  # can have multiple same elements
         # partition array
         l_arr, r_arr = [], []
-        for i in range(1, len(arr)):
+        for i in ran(1, len(arr)):
             if arr[i] < pivot:
                 l_arr.append(arr[i])
             else:
@@ -129,14 +129,22 @@ def quick_sort(nums):
         return sorted_l_arr + [pivot] + sorted_r_arr
     
     return divide_conquer(nums)
-    
-def heap_sort(nums):
-    # implement min-heap and max-heap
-    pass
 
 def counting_sort(nums):
-    # when range is small (order of input) and known
-    pass
+    # when ran is small (order of input) and known
+    if len(nums) <= 1:
+        return nums
+    ran = min(nums), max(nums)
+    freq = [0] * (ran[1] - ran[0] + 1)
+    for num in nums:
+        idx  = num - ran[0]
+        freq[idx] += 1
+    nums = []
+    for idx, count in enumerate(freq):
+        num = idx + ran[0]
+        if count > 0:
+            nums.extend([num] * count)
+    return nums
 
 if __name__=="__main__":
     test_cases = [
@@ -148,6 +156,6 @@ if __name__=="__main__":
         [6, 5, 4, 3, 2, 1]
     ]
     for test_case in test_cases:
-        ans = quick_sort(test_case)
+        ans = counting_sort(test_case)
         print(ans)
         assert ans == sorted(test_case), f"original: {test_case} ours: {ans}"
