@@ -11,11 +11,11 @@ class Solution:
         freq_dict  = {}
         for num in nums:
             freq_dict[num] = 1 + freq_dict.get(num, 0)
-        heap = [(0, -1)] * k
+        heap = []
         for num, freq in freq_dict.items():
             heapq.heappush(heap, (-freq, num))
         res = []
-        while len(res) < k:
+        while len(res) < k:  # O(klogn)
             res.append(heapq.heappop(heap)[1])
         return res
     
@@ -26,7 +26,7 @@ class Solution:
                 freq_dict[num] += 1
             else:
                 freq_dict[num] = 1
-        freq_dict = list(sorted(freq_dict.items(), key=lambda item: item[1], reverse=True))  # nlogn
+        freq_dict = list(sorted(freq_dict.items(), key=lambda item: item[1], reverse=True))  # O(nlogn)
         return [item[0] for item in freq_dict[:k]]
     
 if __name__=="__main__":
