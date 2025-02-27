@@ -33,3 +33,8 @@
 - remove nth node from a linked list recursively
 - merge two sorted linked lists iteratively
 - merge two lists iteratively at alternate positions
+
+## Trees
+- inorder traversal of a binary tree recursively
+- preorder traversal of a binary tree recursively
+- postorder traversal of a binary tree recursively
