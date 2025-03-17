@@ -38,13 +38,36 @@ def print_tree(root):
         print()
 
     bfs(root)
+    
+# for each node, get depth of left and right nodes
+# see if they differ by more than 1
 
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        pass
+        
+        def recurse(node):
+            
+            if not node: return 0, True
+            
+            l_depth = r_depth = 0
+            l_balanced = r_balanced = True
+            
+            if node.left: l_depth, l_balanced = recurse(node.left)
+            if node.right: r_depth, r_balanced = recurse(node.right)
+            
+            balanced = abs(l_depth - r_depth) <= 1
+            balanced = balanced and l_balanced and r_balanced
+            
+            return max(l_depth, r_depth) + 1, balanced
+        
+        _, balanced = recurse(root)
+        return balanced
 
 if __name__=="__main__":
     sol = Solution()
-    tc1 = build_tree_from_list([1,2,3,4,5])
-    print_tree(tc1)
-    print_tree(sol.diameterOfBinaryTree(tc1))
+    tc1 = build_tree_from_list([3,9,20,None,None,15,7])
+    tc2 = build_tree_from_list([1,2,2,3,3,None,None,4,4])
+    tc3 = build_tree_from_list([1,2])
+    print(sol.diameterOfBinaryTree(tc1))
+    print(sol.diameterOfBinaryTree(tc2))
+    print(sol.diameterOfBinaryTree(tc3))

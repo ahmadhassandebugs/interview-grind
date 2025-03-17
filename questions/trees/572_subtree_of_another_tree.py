@@ -39,12 +39,31 @@ def print_tree(root):
 
     bfs(root)
 
-class Solution:
-    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        pass
 
-if __name__=="__main__":
+class Solution:
+    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+        
+        def dfs(node):
+            if not node: return False
+            if is_same(node, subRoot): return True
+            return dfs(node.left) or dfs(node.right)
+        
+        def is_same(node1, node2):
+            if (not node1) ^ (not node2): return False
+            if (not node1) and (not node2): return True
+            
+            return (node1.val == node2.val and
+                    is_same(node1.left, node2.left) and
+                    is_same(node1.right, node2.right))
+                       
+        return dfs(root)
+
+
+if __name__ == "__main__":    
     sol = Solution()
-    tc1 = build_tree_from_list([1,2,3,4,5])
-    print_tree(tc1)
-    print_tree(sol.diameterOfBinaryTree(tc1))
+    tc1 = build_tree_from_list([3,4,5,1,2]), build_tree_from_list([4,1,2])
+    tc2 = build_tree_from_list([3,4,5,1,2,None,None,None,None,0]), build_tree_from_list([4,1,2])
+    tc3 = build_tree_from_list([1,1]), build_tree_from_list([1])
+    print(sol.isSubtree(*tc1))
+    print(sol.isSubtree(*tc2))
+    print(sol.isSubtree(*tc3))

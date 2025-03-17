@@ -39,12 +39,31 @@ def print_tree(root):
 
     bfs(root)
 
+# 
+
 class Solution:
-    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        pass
+    def goodNodes(self, root: TreeNode) -> int:
+        
+        def dfs(node: TreeNode, prefix_path=[]):
+            
+            if not node: return 0
+            
+            if not prefix_path or node.val >= max(prefix_path): good = 1
+            else: good = 0
+            
+            l_good_nodes = r_good_nodes = 0
+            if node.left: l_good_nodes = dfs(node.left, prefix_path + [node.val])
+            if node.right: r_good_nodes = dfs(node.right, prefix_path + [node.val])
+            
+            return good + l_good_nodes + r_good_nodes
+            
+        return dfs(root, [])
 
 if __name__=="__main__":
     sol = Solution()
-    tc1 = build_tree_from_list([1,2,3,4,5])
-    print_tree(tc1)
-    print_tree(sol.diameterOfBinaryTree(tc1))
+    tc1 = build_tree_from_list([3,1,4,3,None,1,5])
+    tc2 = build_tree_from_list([3,3,None,4,2])
+    tc3 = build_tree_from_list([1])
+    print(sol.goodNodes(tc1))
+    print(sol.goodNodes(tc2))
+    print(sol.goodNodes(tc3))

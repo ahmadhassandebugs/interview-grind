@@ -39,33 +39,40 @@ def print_tree(root):
 
     bfs(root)
 
-# [1,2,3,4,5]
-# for each node, we have to get diameter and depth
-# depth = max(l_depth, r_depth) + 1
-# max_diameter = max(l_dia, r_dia, l_depth + r_depth)
 
 class Solution:
-    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
         
-        def recurse(node: Optional[TreeNode]) -> Tuple[int, int]:
-            l_depth = r_depth = l_dia = r_dia = dia = 0
+        def dfs(node: Optional[TreeNode]) -> Tuple[int, int, bool]:
+            
+            l_low = r_low = float('inf')
+            l_high = r_high = float('-inf')
+            l_valid = r_valid = True
             
             if node.left:
-                l_depth, l_dia = recurse(node.left)
-                dia += l_depth
+                l_low, l_high, l_valid = dfs(node.left)
+                
             if node.right:
-                r_depth, r_dia = recurse(node.right)
-                dia += r_depth
+                r_low, r_high, r_valid = dfs(node.right)
+                
+            lowest = min(node.val, l_low, r_low)
+            highest = max(node.val, l_high, r_high)
+            valid = l_high < node.val < r_low
             
-            depth = max(l_depth, r_depth) + 1
-            dia = max(l_dia, r_dia, dia)
-            return depth, dia
+            return lowest, highest, valid and l_valid and r_valid           
+
         
-        _, dia = recurse(root)
-        return dia
+        if not root: return True
+        _, _, valid = dfs(root)
+        return valid
+            
+
 
 if __name__=="__main__":
     sol = Solution()
-    tc1 = build_tree_from_list([1])
-    print_tree(tc1)
-    print(sol.diameterOfBinaryTree(tc1))
+    tc1 = build_tree_from_list([2,1,3])
+    tc2 = build_tree_from_list([5,1,4,None,None,3,6])
+    tc3 = build_tree_from_list([1])
+    print(sol.isValidBST(tc1))
+    print(sol.isValidBST(tc2))
+    print(sol.isValidBST(tc3))
