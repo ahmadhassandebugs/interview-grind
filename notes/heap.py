@@ -1,6 +1,3 @@
-# [5, 3, 8, 1, 6, 0, 10]
-# 
-
 
 class MinHeap:
     def __init__(self):
@@ -21,19 +18,26 @@ class MinHeap:
         self._heapify_up(self.n - 1)
     
     def pop(self) -> int:
+        if self.n <= 0: raise ValueError("Empty Heap")
         # replace root with last element
+        return_val = self.container[0]
         self._swap(0, self.n-1)
         self.container.pop()
         self.n -= 1
         # heapify down to restore heap property
         self._heapify_down(0)
+        return return_val
     
     def peek(self) -> int:
-        if self.n <= 0: return ValueError("Empty Heap")
+        if self.n <= 0: raise ValueError("Empty Heap")
         return self.container[0]
     
-    def heapify(self):
-        pass
+    def heapify(self, nums):
+        for num in nums: self.push(num)
+        i  = (self.n - 1) // 2
+        while i > 0:
+            self._heapify_down(i)
+            i = self._parent(i)
     
     def _parent(self, i, check=True):
         idx = (i-1) // 2
@@ -155,6 +159,10 @@ if __name__ == "__main__":
     try:
         heap.peek()
     except ValueError as e:
-        assert str(e) == "Empty Heap", f"Expected 'Empty Heap', got {str(e)}"
-    else:
-        assert False, "Expected ValueError for empty heap"
+        assert str(e) == "Empty Heap"
+    else: assert False, "Some other error"
+    
+    heap = MinHeap()
+    nums = [5, 3, 8, 1, 6, 0, 10]
+    heap.heapify(nums)
+    print(heap)
