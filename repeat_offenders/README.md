@@ -8,21 +8,19 @@
 - binary search in a rotated sorted array iteratively
 - binary search in a rotated sorted array with duplicates iteratively
 
-## BFS
-- bfs in a binary tree iteratively
-- bfs in a binary tree recursively
-- bfs in a graph iteratively
-- bfs in a graph recursively
-- bfs in a graph with cycles iteratively
-- bfs in a graph with cycles recursively
+## Trees
+- inorder traversal of a binary tree recursively
+- preorder traversal of a binary tree recursively
+- postorder traversal of a binary tree recursively
 
-## DFS
-- dfs in a binary tree iteratively
-- dfs in a binary tree recursively
-- dfs in a graph iteratively
-- dfs in a graph recursively
-- dfs in a graph with cycles iteratively
-- dfs in a graph with cycles recursively
+
+## Graphs
+- bfs in a graph iteratively (can have cycles)
+- bfs in a graph recursively (can have cycles)
+- dfs in a graph iteratively (can have cycles)
+- dfs in a graph recursively (can have cycles)
+- topological sort in a graph
+- shortest path in a graph (dijkstra's algorithm)
 
 ## Linked List
 - reverse a linked list iteratively
@@ -33,8 +31,3 @@
 - remove nth node from a linked list recursively
 - merge two sorted linked lists iteratively
 - merge two lists iteratively at alternate positions
-
-## Trees
-- inorder traversal of a binary tree recursively
-- preorder traversal of a binary tree recursively
-- postorder traversal of a binary tree recursively
