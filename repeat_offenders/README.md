@@ -1,6 +1,9 @@
 # Practice Many Times
 
 ## Binary Search
+
+Practiced on [04/09/2025, 04/09/2025, 04/10/2025]
+
 - binary search in a bst iteratively
 - binary search in a bst recursively
 - binary search in a sorted array iteratively
@@ -15,6 +18,9 @@
 
 
 ## Graphs
+
+Practiced on []
+
 - bfs in a graph iteratively (can have cycles)
 - bfs in a graph recursively (can have cycles)
 - dfs in a graph iteratively (can have cycles)
