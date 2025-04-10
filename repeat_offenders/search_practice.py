@@ -9,72 +9,27 @@ class TreeNode:
 
 # 1. Binary Search in a BST Iteratively
 def bst_search_iterative(root: TreeNode, target: int) -> bool:
-    while root:
-        if root.val == target: return True
-        root = root.left if root.val >= target else root.right
-    return False
+    pass
 
 # 2. Binary Search in a BST Recursively
 def bst_search_recursive(root: TreeNode, target: int) -> bool:
-    if not root: return False
-    if root.val == target: return True
-    elif root.val >= target: return bst_search_recursive(root.left, target)
-    else: return bst_search_recursive(root.right, target)
+    pass
 
 # 3. Binary Search in a Sorted Array Iteratively
 def binary_search_iterative(arr: list[int], target: int) -> int:
-    l, r = 0, len(arr) - 1
-    while l <= r:
-        mid = (l + r) // 2
-        if arr[mid] == target: return mid
-        elif arr[mid] > target: r = mid - 1
-        else: l = mid + 1
-    return -1
+    pass
 
 # 4. Binary Search in a Sorted Array Recursively
 def binary_search_recursive(arr: list[int], target: int, l: int, r: int) -> int:
-    if l > r: return -1
-    mid = (l + r) // 2
-    if arr[mid] == target: return mid
-    elif arr[mid] > target: return binary_search_recursive(arr, target, l, mid - 1)
-    else: return binary_search_recursive(arr, target, mid + 1, r)
+    pass
 
 # 5. Binary Search in a Rotated Sorted Array Iteratively
 def rotated_binary_search_iterative(arr: list[int], target: int) -> int:
-    l, r = 0, len(arr) - 1
-    while l <= r:
-        mid = (l + r) // 2
-        if arr[mid] == target: return mid
-        
-        if arr[l] <= arr[mid]:  # left side is sorted
-            if arr[l] <= target < arr[mid]: r = mid - 1
-            else: l = mid + 1
-        else:  # right side is sorted
-            if arr[mid] < target <= arr[r]: l = mid + 1
-            else: r = mid - 1
-    return -1
-    
+    pass
 
 # 6. Binary Search in a Rotated Sorted Array with Duplicates Iteratively
 def rotated_binary_search_duplicates_iterative(arr: list[int], target: int) -> int:
-    l, r = 0, len(arr) - 1
-    while l <= r:
-        mid = (l + r) // 2
-        if arr[mid] == target: return mid
-        
-        # in case of duplicates at the ends
-        if arr[l] == arr[mid] == arr[r]:
-            l += 1
-            r -= 1
-            continue
-        
-        if arr[l] <= arr[mid]:  # left side is sorted
-            if arr[l] <= target < arr[mid]: r = mid - 1
-            else: l = mid + 1
-        else:  # right side is sorted
-            if arr[mid] < target <= arr[r]: l = mid + 1
-            else: r = mid - 1
-    return -1
+    pass
 
 # Test Cases
 if __name__ == "__main__":
