@@ -2,7 +2,7 @@
 
 ## Binary Search
 
-Practiced on [04/09/2025, 04/09/2025, 04/10/2025]
+Practiced on [04/09/2025, 04/09/2025, 04/10/2025, 04/26/2025 (25 mins)]
 
 - binary search in a bst iteratively
 - binary search in a bst recursively
@@ -19,7 +19,7 @@ Practiced on [04/09/2025, 04/09/2025, 04/10/2025]
 
 ## Graphs
 
-Practiced on []
+Practiced on [04/21/2025, 04/26/2025, 04/26/2025 (25 mins)]
 
 - bfs in a graph iteratively (can have cycles)
 - bfs in a graph recursively (can have cycles)
