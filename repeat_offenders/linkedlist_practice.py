@@ -25,36 +25,40 @@ def print_list(head):
 # ----- Scaffolds to Implement -----
 
 def reverse_list_iterative(head):
-    # TODO: Reverse using three pointers
-    return head
+    pass
 
 def reverse_list_recursive(head):
-    # TODO: Reverse recursively
-    return head
+    pass
 
 def find_middle(head):
-    # TODO: Use slow and fast pointer
-    return head
+    pass
 
 def has_cycle(head):
-    # TODO: Detect cycle using slow and fast pointer
-    return False
+    pass
 
 def remove_nth_from_end_iterative(head, n):
-    # TODO: Remove nth node from end using two pointers
-    return head
+    pass
 
 def remove_nth_from_end_recursive(head, n):
-    # TODO: Remove nth node from end using recursion
-    return head
+    pass
 
 def merge_two_sorted_lists(l1, l2):
-    # TODO: Merge two sorted lists
-    return l1
+    pass
 
 def merge_alternate(l1, l2):
-    # TODO: Merge two lists at alternate positions
-    return l1
+    pass
+
+def add_node_at_beginning(head, val):
+    pass
+
+def add_node_at_end(head, val):
+    pass
+
+def remove_node_from_beginning(head):
+    pass
+
+def remove_node_from_end(head):
+    pass
 
 # ----- Test Cases -----
 
@@ -100,6 +104,17 @@ def test_merge_alternate():
     new_head = merge_alternate(l1, l2)
     print_list(new_head)
 
+def test_add_remove_operations():
+    head = build_list([1, 2, 3])
+    head = add_node_at_beginning(head, 0)
+    print_list(head)  # 0 -> 1 -> 2 -> 3
+    head = add_node_at_end(head, 4)
+    print_list(head)  # 0 -> 1 -> 2 -> 3 -> 4
+    head = remove_node_from_beginning(head)
+    print_list(head)  # 1 -> 2 -> 3 -> 4
+    head = remove_node_from_end(head)
+    print_list(head)  # 1 -> 2 -> 3
+
 # ----- Run All Tests -----
 
 if __name__ == "__main__":
@@ -119,3 +134,5 @@ if __name__ == "__main__":
     test_merge_two_sorted_lists()
     print("\nTest Merge Alternate:")
     test_merge_alternate()
+    print("\nTest Add/Remove Operations:")
+    test_add_remove_operations()

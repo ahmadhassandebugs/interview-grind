@@ -110,6 +110,36 @@ def merge_alternate(l1, l2):
         curr.next = l2
     return head
 
+def add_node_at_beginning(head, val):
+    # Add node at the beginning
+    new_node = ListNode(val)
+    new_node.next = head
+    return new_node
+
+def add_node_at_end(head, val):
+    # Add node at the end
+    new_node = ListNode(val)
+    if not head: return new_node
+    curr = head
+    while curr.next:
+        curr = curr.next
+    curr.next = new_node
+    return head
+
+def remove_node_from_beginning(head):
+    # Remove node from the beginning
+    if not head: return None
+    return head.next
+
+def remove_node_from_end(head):
+    # Remove node from the end
+    if not head or not head.next: return None
+    curr = head
+    while curr.next and curr.next.next:
+        curr = curr.next
+    curr.next = None
+    return head
+
 # ----- Test Cases -----
 
 def test_reverse_list_iterative():
@@ -154,6 +184,17 @@ def test_merge_alternate():
     new_head = merge_alternate(l1, l2)
     print_list(new_head)
 
+def test_add_remove_operations():
+    head = build_list([1, 2, 3])
+    head = add_node_at_beginning(head, 0)
+    print_list(head)  # 0 -> 1 -> 2 -> 3
+    head = add_node_at_end(head, 4)
+    print_list(head)  # 0 -> 1 -> 2 -> 3 -> 4
+    head = remove_node_from_beginning(head)
+    print_list(head)  # 1 -> 2 -> 3 -> 4
+    head = remove_node_from_end(head)
+    print_list(head)  # 1 -> 2 -> 3
+
 # ----- Run All Tests -----
 
 if __name__ == "__main__":
@@ -173,3 +214,5 @@ if __name__ == "__main__":
     test_merge_two_sorted_lists()
     print("\nTest Merge Alternate:")
     test_merge_alternate()
+    print("\nTest Add/Remove Operations:")
+    test_add_remove_operations()
