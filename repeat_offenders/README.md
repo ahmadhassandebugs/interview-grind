@@ -29,6 +29,9 @@ Practiced on [04/21/2025, 04/26/2025, 04/26/2025 (25 mins)]
 - shortest path in a graph (dijkstra's algorithm)
 
 ## Linked List
+
+Practiced on [04/28/2025, 04/28/2025]
+
 - reverse a linked list iteratively
 - reverse a linked list recursively
 - middle of a linked list iteratively
