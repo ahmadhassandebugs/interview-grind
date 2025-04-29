@@ -2,7 +2,7 @@
 
 ## Binary Search
 
-Practiced on [04/09/2025, 04/09/2025, 04/10/2025, 04/26/2025 (25 mins)]
+Practiced on [04/09/2025, 04/09/2025, 04/10/2025, 04/26/2025 (25 mins), 04/27/2025]
 
 - binary search in a bst iteratively
 - binary search in a bst recursively
@@ -19,7 +19,7 @@ Practiced on [04/09/2025, 04/09/2025, 04/10/2025, 04/26/2025 (25 mins)]
 
 ## Graphs
 
-Practiced on [04/21/2025, 04/26/2025, 04/26/2025 (25 mins)]
+Practiced on [04/21/2025, 04/26/2025, 04/26/2025 (25 mins), 04/27/2025]
 
 - bfs in a graph iteratively (can have cycles)
 - bfs in a graph recursively (can have cycles)
@@ -40,3 +40,12 @@ Practiced on [04/28/2025, 04/28/2025]
 - remove nth node from a linked list recursively
 - merge two sorted linked lists iteratively
 - merge two lists iteratively at alternate positions
+- add/remove from end/beginning of a linked list
+
+## Sliding Window
+
+Practiced on []
+
+## Two Pointer
+
+Practiced on []
