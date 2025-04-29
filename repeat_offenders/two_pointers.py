@@ -3,6 +3,11 @@
 # 1. Two Sum II (Input array is sorted)
 def two_sum_sorted(nums, target):
     # TODO: Implement two pointers from both ends
+    l, r = 0, len(nums) - 1
+    while l < r:
+        if nums[l] + nums[r] == target: return [l+1, r+1]
+        elif nums[l] + nums[r] > target: r -= 1
+        else: l += 1
     return []
 
 def test_two_sum_sorted():
@@ -14,7 +19,18 @@ def test_two_sum_sorted():
 # 2. Valid Palindrome (alphanumeric only)
 def is_palindrome(s):
     # TODO: Skip non-alphanum and compare with two pointers
-    return False
+    l, r = 0, len(s) - 1
+    while l < r:
+        if not s[l].isalnum():
+            l += 1
+            continue
+        if not s[r].isalnum():
+            r -= 1
+            continue
+        if s[l].lower() != s[r].lower(): return False
+        l += 1
+        r -= 1
+    return True
 
 def test_is_palindrome():
     print(is_palindrome("A man, a plan, a canal: Panama"))  # Expected: True
@@ -25,7 +41,14 @@ def test_is_palindrome():
 # 3. Container With Most Water
 def max_area(height):
     # TODO: Two pointers to find max area
-    return 0
+    l, r = 0, len(height) - 1
+    max_area = 0
+    while l < r:
+        curr_area = min(height[l], height[r]) * (r - l)
+        if curr_area > max_area: max_area = curr_area
+        if height[l] <= height[r]: l += 1
+        else: r -= 1
+    return max_area
 
 def test_max_area():
     print(max_area([1,8,6,2,5,4,8,3,7]))  # Expected: 49
@@ -34,9 +57,20 @@ def test_max_area():
 
 
 # 4. Remove Duplicates from Sorted Array (In-place)
+# [1,1,2,3,3]
+# l is where the new unique number goes
+# r is the current number
+# copy r number if it's different from l-1 and move l and r
+# else, move r to find a new number
 def remove_duplicates(nums):
     # TODO: Modify array in-place, return new length
-    return 0
+    l = r = 1
+    while r < len(nums):
+        if nums[l - 1] != nums[r]:
+            nums[l] = nums[r]
+            l += 1
+        r += 1
+    return l
 
 def test_remove_duplicates():
     nums = [1,1,2]
@@ -48,9 +82,18 @@ def test_remove_duplicates():
 
 
 # 5. Move Zeroes (In-place)
+# same approach as above but with zeros instead of same number condition
 def move_zeroes(nums):
     # TODO: Move non-zeroes forward, zeroes to end
-    pass
+    l = r = 0
+    while r < len(nums):
+        if nums[r] != 0:
+            nums[l] = nums[r]
+            l += 1
+        r += 1
+    while l < len(nums):
+        nums[l] = 0
+        l += 1
 
 def test_move_zeroes():
     nums = [0,1,0,3,12]
@@ -62,9 +105,20 @@ def test_move_zeroes():
 
 
 # 6. Merge Two Sorted Arrays (A has enough space at end)
+# start from the end
 def merge_sorted_arrays(nums1, m, nums2, n):
     # TODO: Merge in-place starting from the end
-    pass
+    m, n = m - 1, n - 1
+    while m >= 0 and n >= 0:
+        if nums1[m] >= nums2[n]:
+            nums1[m + n + 1] = nums1[m]
+            m -= 1
+        else:
+            nums1[m + n + 1] = nums2[n]
+            n -= 1
+    while n >= 0:
+        nums1[m + n + 1] = nums2[n]
+        n -= 1
 
 def test_merge_sorted_arrays():
     nums1 = [1,2,3,0,0,0]
@@ -75,12 +129,26 @@ def test_merge_sorted_arrays():
     nums2 = [1,2,3]
     merge_sorted_arrays(nums1, 3, nums2, 3)
     print(nums1)  # Expected: [1,2,3,4,5,6]
+    nums1 = [1,2,3,0,0,0]
+    nums2 = [4,5,6]
+    merge_sorted_arrays(nums1, 3, nums2, 3)
+    print(nums1)  # Expected: [1,2,3,4,5,6]
 
 
 # 7. Sort Colors (Dutch National Flag)
 def sort_colors(nums):
     # TODO: Three pointers for 0s, 1s, and 2s
-    pass
+    low, mid, high = 0, 0, len(nums) - 1
+    while mid <= high:
+        if nums[mid] == 0:
+            nums[mid], nums[low] = nums[low], nums[mid]
+            low += 1
+            mid += 1
+        elif nums[mid] == 1:
+            mid += 1
+        else:
+            nums[mid], nums[high] = nums[high], nums[mid]
+            high -= 1
 
 def test_sort_colors():
     nums = [2,0,2,1,1,0]
@@ -94,35 +162,17 @@ def test_sort_colors():
 # 8. Is Subsequence
 def is_subsequence(s, t):
     # TODO: Traverse both with two pointers
-    return False
+    l, r = 0, 0
+    while l < len(s) and r < len(t):
+        if s[l] == t[r]:
+            l += 1
+        r += 1
+    return l == len(s)
 
 def test_is_subsequence():
     print(is_subsequence("abc", "ahbgdc"))  # Expected: True
     print(is_subsequence("axc", "ahbgdc"))  # Expected: False
     print(is_subsequence("", "ahbgdc"))  # Expected: True
-
-
-# 9. Linked List Cycle Detection (Floyd’s Tortoise and Hare)
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
-
-def has_cycle(head):
-    # TODO: Use slow and fast pointer
-    return False
-
-def test_has_cycle():
-    head = ListNode(3)
-    head.next = ListNode(2)
-    head.next.next = ListNode(0)
-    head.next.next.next = ListNode(-4)
-    head.next.next.next.next = head.next  # Cycle to node with val=2
-    print(has_cycle(head))  # Expected: True
-
-    head2 = ListNode(1)
-    head2.next = ListNode(2)
-    print(has_cycle(head2))  # Expected: False
 
 
 # Run all tests
@@ -135,4 +185,3 @@ if __name__ == "__main__":
     test_merge_sorted_arrays()
     test_sort_colors()
     test_is_subsequence()
-    test_has_cycle()
