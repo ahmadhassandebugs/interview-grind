@@ -34,11 +34,6 @@ def test_max_area():
 
 
 # 4. Remove Duplicates from Sorted Array (In-place)
-# [1,1,2,3,3]
-# l is where the new unique number goes
-# r is the current number
-# copy r number if it's different from l-1 and move l and r
-# else, move r to find a new number
 def remove_duplicates(nums):
     # TODO: Modify array in-place, return new length
     pass
@@ -53,7 +48,6 @@ def test_remove_duplicates():
 
 
 # 5. Move Zeroes (In-place)
-# same approach as above but with zeros instead of same number condition
 def move_zeroes(nums):
     # TODO: Move non-zeroes forward, zeroes to end
     pass
@@ -68,7 +62,6 @@ def test_move_zeroes():
 
 
 # 6. Merge Two Sorted Arrays (A has enough space at end)
-# start from the end
 def merge_sorted_arrays(nums1, m, nums2, n):
     # TODO: Merge in-place starting from the end
     pass

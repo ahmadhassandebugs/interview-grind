@@ -12,6 +12,9 @@ Practiced on [04/09/2025, 04/09/2025, 04/10/2025, 04/26/2025 (25 mins), 04/27/20
 - binary search in a rotated sorted array with duplicates iteratively
 
 ## Trees
+
+Practiced on []
+
 - inorder traversal of a binary tree recursively
 - preorder traversal of a binary tree recursively
 - postorder traversal of a binary tree recursively
@@ -42,10 +45,10 @@ Practiced on [04/28/2025, 04/28/2025]
 - merge two lists iteratively at alternate positions
 - add/remove from end/beginning of a linked list
 
-## Sliding Window
-
-Practiced on []
-
 ## Two Pointer
+
+Practiced on [04/29/2025, 04/30/2025 (20 mins)]
+
+## Sliding Window
 
 Practiced on []
