@@ -5,9 +5,9 @@
 """
 
 class Node:
-    def __init__(self, x, next=None):
+    def __init__(self, x):
         self.data = x
-        self.next = next
+        self.next = None
         
 class LinkedList:
     def __init__(self):
@@ -24,11 +24,11 @@ class LinkedList:
         curr, result = self.head, ""
         while curr:
             result += f"{curr.data}->"
+            curr = curr.next
         return f"{result}None"
         
     def insert_at_begin(self, x):
-        node = Node(x, self.head)
-        self.head = node
+        pass
     
     def insert_at_end(self, x):
         pass
@@ -47,6 +47,7 @@ class LinkedList:
     
     def delete_element(self, x):
         pass
+            
 
 if __name__ == "__main__":
     ll = LinkedList()
@@ -83,10 +84,15 @@ if __name__ == "__main__":
     ll.delete_element(20)
     print(ll)  # Expected: ->10->30->None
     
-    # Test __len__
-    print(len(ll))  # Expected: 2
-    
-    # Test __str__
-    print(ll)  # Expected: ->10->30->None
-
-        
+    # Test delete_at_index
+    ll.insert_at_begin(50)
+    ll.insert_at_begin(40)
+    print(ll)  # Expected: ->40->50->10->30->None
+    ll.delete_at_index(0)
+    print(ll)  # Expected: ->50->10->30->None
+    ll.delete_at_index(1)
+    print(ll)  # Expected: ->50->30->None
+    ll.delete_at_index(1)
+    print(ll)  # Expected: ->50->None
+    ll.delete_at_index(0)
+    print(ll)  # Expected: ->None

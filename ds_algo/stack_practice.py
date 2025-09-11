@@ -1,14 +1,3 @@
-##### Stack #####
-# 1. push(x) O(1)
-# 2. pop() O(1)
-# 3. peek() O(1)
-# 4. size, isEmpty
-
-# we can use a singly linked list with a single
-#   front pointer
-# push adds element to the front and pop removes
-#   from the front
-
 class Node:
   def __init__(self, data):
     self.data = data
@@ -16,36 +5,22 @@ class Node:
 
 class Stack:
   def __init__(self):
-    self.front = None
-    self.n = 0
+    pass
     
   def push(self, x):
-    if not self.front:
-      self.front = Node(x)
-    else:
-      node = Node(x)
-      node.next = self.front
-      self.front = node
-    self.n += 1
+    pass
   
   def pop(self):
-    if self.is_empty():
-      return KeyError("Empty Stack")
-    node = self.front
-    self.front = self.front.next
-    self.n -= 1
-    return node.data
+    pass
   
   def peek(self):
-    if self.is_empty():
-      return KeyError("Empty Stack")
-    return self.front.data
+    pass
   
   def size(self):
-    return self.n
+    pass
   
   def is_empty(self):
-    return self.n == 0
+    pass
 
 if __name__=="__main__":
   # Test cases for Stack class
