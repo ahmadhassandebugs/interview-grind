@@ -41,14 +41,12 @@ class CustomList:
     return None
   
   def delete(self, x):
+    if self.n == 0: return
     pos = self.index(x)
-    if pos is None:  # also handles the empty case
-      return None
-    for i in range(pos, self.n-1):
-      self.container[i] = self.container[i+1]
+    if pos is None: return
     self.n -= 1
-    if self.n <= self.size/2:
-      self.__resize(int(self.size/2))
+    for i in range(pos, self.n): self.container[i] = self.container[i + 1]
+    if self.n + 1 == self.cap // 2: self.__resize_array(self.cap // 2) 
       
   def __make_array(self, cap):
     return (cap * ctypes.py_object)()
@@ -71,9 +69,11 @@ if __name__=="__main__":
   my_list = CustomList()
   # Append elements
   my_list.append(10)
+  print("After appending 10:", my_list)
   my_list.append(20)
+  print("After appending 20:", my_list)
   my_list.append(30)
-  print("After appending 10, 20, 30:", my_list)
+  print("After appending 30:", my_list)
   # Find an element
   print("Index of 20:", my_list.index(20))
   print("Index of 15:", my_list.index(15))
