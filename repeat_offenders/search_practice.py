@@ -83,3 +83,5 @@ if __name__ == "__main__":
     # Test for rotated sorted array with duplicates iterative
     assert rotated_binary_search_duplicates_iterative(rotated_array_duplicates, 0) == 3  # True
     assert rotated_binary_search_duplicates_iterative(rotated_array_duplicates, 3) == -1  # False
+
+    print("All test cases passed!!")

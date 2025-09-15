@@ -3,15 +3,18 @@
 ## Binary Search
 
 Practiced on
-- 
+- 09/15/2025 20 mins
 
 ## Trees
 
 Practiced on
+- 
 
 ## Graphs
 
 Practiced on
+- 09/15/2025 45 mins
+    - Mark visited when adding to the queue. Marking at popping leads to the same node enqueued multiple times.
 
 ## Linked List
 
@@ -25,7 +28,9 @@ Practiced on
 ## Two Pointer
 
 Practiced on
+- 
 
 ## Sliding Window
 
 Practiced on
+- 
