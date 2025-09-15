@@ -70,14 +70,15 @@ def remove_nth_from_end_iterative(head, n):
     return dummy.next
 
 def remove_nth_from_end_recursive(head, n):
+    dummy = ListNode(0, head)
     def recurse(node):
         if not node: return 0
         i = recurse(node.next) + 1
         if i == n + 1:
             node.next = node.next.next
         return i
-    recurse(head)
-    return head
+    recurse(dummy)
+    return dummy.next
 
 def merge_two_sorted_lists(l1, l2):
     curr = dummy= ListNode(0)
