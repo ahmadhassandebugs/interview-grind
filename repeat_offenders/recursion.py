@@ -9,6 +9,40 @@ from __future__ import annotations
 import unittest
 from typing import List, Optional, Tuple
 
+"""
+# 🌀 Recursion Cheat Sheet
+
+## 🔑 Tips for Solving Recursion Problems
+- **Identify the base case** → the simplest input that stops recursion.  
+- **Define the recursive step in words** before coding.  
+- **Avoid recomputing** → use memoization (cache results).  
+- **Think divide & conquer** → split the problem into smaller independent subproblems.  
+- **Use helper functions** when you need extra state (e.g., indices, accumulators).  
+- **Visualize with small inputs** → draw recursion trees for clarity.  
+- **Convert to iterative if needed** → tail recursion → loop, DP for overlapping subproblems.  
+
+---
+
+## 📂 Common Recursion Patterns
+
+### Divide & Conquer
+- Binary Search  
+- Merge Sort / Quick Sort  
+
+### Tree Recursion (multiple recursive calls)
+- Fibonacci sequence  
+- Binary tree traversals (preorder, inorder, postorder)  
+
+### Choice Recursion (explore all options → bridge to backtracking)
+- Generate subsets (power set)  
+- Generate permutations  
+
+### Recursion + Memoization
+- Fibonacci optimized  
+- Word Break  
+- Unique BSTs (Catalan problems)  
+
+"""
 
 # -----------------------------
 # Data structures & utilities
@@ -76,17 +110,21 @@ def serialize_tree_preorder(root: Optional[TreeNode]) -> List[Optional[int]]:
 
 def factorial(n: int) -> int:
     """Return n! using recursion. Assume n >= 0."""
-    pass
+    if n <= 1: return 1
+    return n * factorial(n - 1)
 
 
 def reverse_string(s: str) -> str:
     """Return the reversed string using recursion."""
-    pass
+    if len(s) <= 1: return s
+    return reverse_string(s[1:]) + s[0]
 
 
 def sum_array(arr: List[int]) -> int:
     """Return sum(arr) using recursion (no loops)."""
-    pass
+    if len(arr) == 0: return 0
+    if len(arr) == 1: return arr[0]
+    return arr[0] + sum_array(arr[1:])
 
 
 # -----------------------------
@@ -95,27 +133,61 @@ def sum_array(arr: List[int]) -> int:
 
 def binary_search_recursive(arr: List[int], target: int, left: int = 0, right: Optional[int] = None) -> int:
     """Return index of target in sorted arr or -1 if not found."""
-    pass
+    if right is None: right = len(arr) - 1
+    if left > right: return -1
+    mid = (left + right) // 2
+    if target > arr[mid]: return binary_search_recursive(arr, target, mid + 1, right)
+    elif target < arr[mid]: return binary_search_recursive(arr, target, left, mid - 1)
+    else: return mid
 
 
 def max_depth(root: Optional[TreeNode]) -> int:
     """Return the maximum depth of a binary tree."""
-    pass
+    if root is None: return 0
+    return 1 + max(max_depth(root.left), max_depth(root.right))
 
 
 def is_palindrome_list_recursive(head: Optional[ListNode]) -> bool:
     """Return True if linked list is a palindrome using recursion."""
-    pass
+    front = head
+    def check(node: Optional[ListNode]):
+        nonlocal front
+        if node is None: return True
+        if not check(node.next): return False
+        ok = front.val == node.val
+        front = front.next
+        return ok
+    return check(head)
 
 
 def merge_two_sorted_lists_recursive(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
     """Merge two sorted linked lists using recursion and return head of merged list."""
-    pass
+    if l1 is None: return l2
+    if l2 is None: return l1
+    if l1.val <= l2.val:
+        l1.next = merge_two_sorted_lists_recursive(l1.next, l2)
+        return l1
+    else:
+        l2.next = merge_two_sorted_lists_recursive(l1, l2.next)
+        return l2
 
 
 def tower_of_hanoi(n: int, src: str = 'A', aux: str = 'B', dst: str = 'C') -> List[Tuple[str, str]]:
     """Return the sequence of moves to solve Tower of Hanoi with n disks as (from_peg, to_peg)."""
-    pass
+    moves: List[Tuple[str, str]] = []
+
+    def solve(k, s, a, d):
+        nonlocal moves
+        if k == 0: return
+        # move k-1 disks from src -> aux
+        solve(k - 1, s, d, a)
+        # move largest disk from src -> dst
+        moves.append((s, d))
+        # move k-1 disks from aux -> dst
+        solve(k - 1, a, s, d)
+    
+    solve(n, src, aux, dst)
+    return moves
 
 
 # -----------------------------
