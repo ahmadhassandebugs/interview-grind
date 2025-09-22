@@ -196,12 +196,74 @@ def tower_of_hanoi(n: int, src: str = 'A', aux: str = 'B', dst: str = 'C') -> Li
 
 def generate_unique_bsts(n: int) -> List[Optional[TreeNode]]:
     """Generate all structurally unique BSTs storing values 1..n and return their roots."""
-    pass
+    memo = {}  # preorder list
+    
+    def build(lo, hi):
+        if lo > hi: return [None]
+        if (lo, hi) in memo: return memo[(lo, hi)]
+        
+        trees = []
+        for i in range(lo, hi + 1):  # any node can be root
+            left_trees = build(lo, i - 1)
+            right_trees = build(i + 1, hi)
+            for L in left_trees:
+                for R in right_trees:
+                    root = TreeNode(i)
+                    root.left = L
+                    root.right = R
+                    trees.append(root)
+        
+        memo[(lo, hi)] = trees
+        return trees
+    
+    if n == 0: return [None]
+    return build(1, n)
 
 
 def word_break_all(s: str, wordDict: List[str]) -> List[str]:
     """Return all sentences formed by breaking s into words from wordDict (order of sentences doesn't matter)."""
-    pass
+    if not s or not wordDict: return []
+    
+    word_set = set(wordDict)  # for quick search
+    min_len = min((len(w) for w in word_set), default=0)  # to reduce search indices
+    max_len = max((len(w) for w in word_set), default=0)
+    
+    memo = {}  # list of sentences starting at each index
+    
+    def can_break():
+        n = len(s)
+        dp = [False] * (n + 1)  # dp[i:] can be constructed using wordDict
+        dp[n] = True  # always true
+        for i in range(n, -1, -1):
+            for l in range(min_len, max_len + 1):
+                j = i + l
+                if j <= n and s[i:j] in word_set and dp[j]:
+                    dp[i] = True
+                    break  # at least one possible sentence
+        
+        return dp[0]  # if whole string can create a sentence
+    
+    if not can_break: return []
+    
+    def dfs(i):
+        if i == len(s): return [""]
+        if i in memo: return memo[i]
+        
+        sub_sentences = []
+        for l in range(min_len, max_len + 1):
+            j = i + l
+            if j <= len(s):
+                piece = s[i:j]
+                if piece in word_set:
+                    tails = dfs(j)  # recurse on rest of the string
+                    for tail in tails:
+                        if tail == "": sub_sentences.append(piece)  # no more words to add
+                        else: sub_sentences.append(f"{piece} {tail}")
+        
+        memo[i] = sub_sentences
+        return sub_sentences
+    
+    return dfs(0)
 
 
 # -----------------------------
