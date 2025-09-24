@@ -213,12 +213,62 @@ def build_tree_pre_in(preorder: List[int], inorder: List[int]) -> Optional[TreeN
 
 def max_path_sum(root: Optional[TreeNode]) -> int:
     """Return the maximum path sum for any path (may start/end anywhere)."""
-    pass
+    max_sum = float("-inf")
+
+    def dfs(node: Optional[TreeNode]):
+        nonlocal max_sum
+        if node is None: return 0
+
+        left_max_sum = dfs(node.left)
+        right_max_sum = dfs(node.right)
+        curr_path_sum = node.val + max(0, left_max_sum) + max(0, right_max_sum)
+
+        if curr_path_sum > max_sum: max_sum = curr_path_sum
+
+        # only one side can continue up; it can be negative
+        return node.val + max(left_max_sum, right_max_sum)
+    
+    dfs(root)
+    return max_sum
 
 
 def distance_k(root: Optional[TreeNode], target: TreeNode, k: int) -> List[int]:
     """Return values of all nodes at distance k from target (order not important)."""
-    pass
+    res = []
+
+    def collect_down(node: Optional[TreeNode], d: int):
+        if node is None: return
+        if d == 0:
+            res.append(node.val)
+            return
+        collect_down(node.left, d - 1)
+        collect_down(node.right, d - 1)
+
+    def dfs(node: Optional[TreeNode]):  # returns distance from target
+        if node is None: return -1
+        if node == target:
+            collect_down(node, k)
+            return 0  # when this returns, we check bends
+        
+        L = dfs(node.left)
+        if L != -1:
+            if L + 1 == k:
+                res.append(node.val)
+            else:
+                collect_down(node.right, k - L - 2)  # one edge up to node and one edge down to right
+                return L + 1
+
+        R = dfs(node.right)
+        if R != -1:
+            if R + 1 == k: res.append(node.val)
+            else:
+                collect_down(node.left, k - R - 2)
+                return R + 1
+        
+        return -1
+    
+    dfs(root)
+    return res
 
 
 # -----------------------------
