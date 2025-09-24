@@ -35,12 +35,16 @@ Practiced on
 ## Recursion
 
 Practiced on
--
+- 09/24/2025 35 mins
+    - in binary search recursive, right would be len(arr) - 1
+    - word break all needs more practice
 
 ## Backtracking
 
 Practiced on
--
+- 09/24/2025 55 mins
+    - in combination sum, backtrack recursively on the loop index to avoid begining from start and adding duplicates
+    - sudoku needs more practice
 
 ## Trees
 
