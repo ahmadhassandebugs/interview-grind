@@ -49,4 +49,5 @@ Practiced on
 ## Trees
 
 Practiced on
-- 
+- 09/24/2024 35 mins
+    - distance_k needs more practice and deeper understanding
