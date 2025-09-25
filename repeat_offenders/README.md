@@ -4,6 +4,8 @@
 
 Practiced on
 - 09/15/2025 20 mins
+- 09/25/2025 16.5 mins
+    - The while condition in iterative search should be `while l <= r` since if there's one ele, l and r will be the same and mid will be the same as l and r and we will return the correct index. `while l < r` will make us stop before we check for the target value.
 
 ## Graphs
 
