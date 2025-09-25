@@ -9,21 +9,21 @@ def bfs_iterative(graph, start):
     :param start: starting node
     :return: list of nodes in BFS order
     """
-    fifo = deque([start])
-    visited = {start}
-    bfs_list = []
-    
-    if start not in graph: return []
-    
-    while fifo:
-        node = fifo.popleft()
-        bfs_list.append(node)    
+    queue = deque([start])
+    visited = set()
+    visited.add(start)
+    res = []
+
+    while queue:
+        node = queue.popleft()
+        res.append(node)
+
         for n in graph.get(node, []):
             if n not in visited:
-                fifo.append(n)
+                queue.append(n)
                 visited.add(n)
     
-    return bfs_list
+    return res
 
 # BFS Recursive
 def bfs_recursive(graph, queue, visited, result):
@@ -34,15 +34,19 @@ def bfs_recursive(graph, queue, visited, result):
     :param visited: set, visited nodes
     :param result: list, nodes in BFS order
     """
-    if not queue: return result  # if nothing more to visit
-    
+    if not queue: return result
+
     node = queue.popleft()
     result.append(node)
+
     for n in graph.get(node, []):
         if n not in visited:
             queue.append(n)
             visited.add(n)
-    return bfs_recursive(graph, queue, visited, result)
+    
+    bfs_recursive(graph, queue, visited, result)
+
+    return result
     
 
 # DFS Iterative
@@ -53,20 +57,20 @@ def dfs_iterative(graph, start):
     :param start: starting node
     :return: list of nodes in DFS order
     """
-    if start not in graph: return []
-    
-    lifo = deque([start])
-    visited = {start}
-    result = []
-    
-    while lifo:
-        node = lifo.pop()
-        result.append(node)
+    queue = deque([start])
+    visited = set(start)
+    res = []
+
+    while queue:
+        node  = queue.pop()
+        res.append(node)
+
         for n in graph.get(node, []):
             if n not in visited:
-                lifo.append(n)
+                queue.append(n)
                 visited.add(n)
-    return result
+    
+    return res
 
 # DFS Recursive
 def dfs_recursive(graph, node, visited, result):
@@ -77,13 +81,15 @@ def dfs_recursive(graph, node, visited, result):
     :param visited: set, visited nodes
     :param result: list, nodes in DFS order
     """
-    if node not in graph or node in visited: return result
-    
+    if node in visited: return result
+
     visited.add(node)
     result.append(node)
-    
+
     for n in graph.get(node, []):
-        if n not in visited: dfs_recursive(graph, n, visited, result)
+        dfs_recursive(graph, n, visited, result)
+
+    return result
 
 # Topological Sort
 def topological_sort(graph):
@@ -92,18 +98,20 @@ def topological_sort(graph):
     :param graph: dict, adjacency list representation of the graph
     :return: list of nodes in topological order
     """
-    result = []
-    visited = set()    
-    def dfs_post(node):
+    if detect_cycle(graph): return None
+    res = []
+    visited = set()
+
+    def dfs(node):
+        if node in visited: return
         visited.add(node)
-        for n in graph.get(node, []):
-            if n not in visited: dfs_post(n)
-        result.append(node)
-    
-    for node in list(graph.keys()):
-        if node not in visited: dfs_post(node)
-    
-    return result[::-1]
+        for n in graph.get(node, []): dfs(n)
+        res.append(node)
+
+    for node in graph.keys():
+        if node not in visited: dfs(node)
+
+    return res[::-1]
 
 # Detect Cycle (using DFS)
 def detect_cycle(graph):
@@ -113,22 +121,23 @@ def detect_cycle(graph):
     :return: bool, True if a cycle exists, False otherwise
     """
     visited = set()
-    call_stack = set()
-    def dfs(node):
+    stack = set()
+
+    def dfs(node):  # return true if cycle
+        if node in stack: return True
+        if node in visited: return False
+
         visited.add(node)
-        call_stack.add(node)
-        
+        stack.add(node)
         for n in graph.get(node, []):
-            if n not in visited:
-                if dfs(n): return True
-            elif n in call_stack: return True
+            if dfs(n): return True
+        stack.remove(node)
         
-        call_stack.remove(node)
         return False
-    
-    for node in list(graph.keys()):
-        if node not in visited:
-            if dfs(node): return True
+
+    for node in graph.keys():
+        if node not in visited and dfs(node): return True
+
     return False
 
 # Dijkstra's Algorithm

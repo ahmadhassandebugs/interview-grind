@@ -12,6 +12,8 @@ Practiced on
 Practiced on
 - 09/15/2025 45 mins
     - Mark visited when adding to the queue. Marking at popping leads to the same node enqueued multiple times.
+- 09/25/2025 40 mins
+    - This needs more practice as each question is still taking time and I am forgetting stuff. I need to make sure we use consistent patterns across all questions so it's easier to remember.
 
 ## Linked List
 
