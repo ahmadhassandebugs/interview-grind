@@ -23,6 +23,7 @@ Practiced on
         - when the head itself can change, e.g., remove nth node from end, remove duplicates, etc.
         - when inserting nodes at the head is possible (no special casing), e.g., merge two lists
         - when simplifying uniform operations, i.e., remove special casing
+- 09/28/2025 20 mins
 
 ## Two Pointer
 
