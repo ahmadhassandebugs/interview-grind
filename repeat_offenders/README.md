@@ -56,6 +56,8 @@ Practiced on
 - 09/24/2025 55 mins
     - in combination sum, backtrack recursively on the loop index to avoid begining from start and adding duplicates
     - sudoku needs more practice
+- 09/25/2025 45 mins
+    - sudoku is taking time due to mistakes (not logical errors)
 
 ## Trees
 
