@@ -47,6 +47,8 @@ Practiced on
 - 09/24/2025 35 mins
     - in binary search recursive, right would be len(arr) - 1
     - word break all needs more practice
+- 09/29/2025 28 mins
+    - in generate_unique_trees, don't forget to recurse over all L and R subtrees
 
 ## Backtracking
 
