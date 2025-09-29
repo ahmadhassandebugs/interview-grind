@@ -30,6 +30,8 @@ Practiced on
 Practiced on
 - 09/20/2025 75 mins
     - pay attention to the stopping conditions. try to understand sort colors even better.
+- 09/29/2025 35 mins
+  - practice sub-sequence and sort_colors (while condition is `m <= r`) more
 
 ## Sliding Window
 
