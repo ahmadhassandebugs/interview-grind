@@ -64,3 +64,5 @@ Practiced on
 Practiced on
 - 09/24/2024 35 mins
     - distance_k needs more practice and deeper understanding
+- 09/30/2024 40 mins
+    - distance_k still giving trouble
