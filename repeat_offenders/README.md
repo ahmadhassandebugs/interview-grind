@@ -66,3 +66,13 @@ Practiced on
     - distance_k needs more practice and deeper understanding
 - 09/30/2024 40 mins
     - distance_k still giving trouble
+
+## Stacks and Queues
+
+Practiced on
+- 
+
+## Dynamic Programming
+
+Practiced on
+- 
