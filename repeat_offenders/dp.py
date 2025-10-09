@@ -1,5 +1,12 @@
 """
-
+- Clearly define what dp[i] or dp[i][j] represents in plain English first.
+- Find the recurrence relation by considering the choices you can make at each step (e.g., take it vs. leave it).
+- Always identify and initialize your base cases before starting the main loops.
+- For 0/1 choices (use item once), your recurrence must refer to the state from the previous item (dp[i-1]).
+- For unbounded choices (reuse item), your recurrence can refer to the state of the current item (dp[i]).
+- If you're stuck, work through a small example manually and write down the results in a table to find the pattern.
+- After finding a 2D solution, always ask yourself if you can optimize space to a 1D array.
+- Bottom-up (iterative) solutions are often preferred in interviews as they avoid recursion limits and can be easier to debug.
 """
 
 # --------------------------------------------------------------------

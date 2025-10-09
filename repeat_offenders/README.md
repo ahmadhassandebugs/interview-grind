@@ -75,4 +75,5 @@ Practiced on
 ## Dynamic Programming
 
 Practiced on
-- 
+- 10/09/2025 60 mins
+  - Needs more practice. Doesn't come naturally.
