@@ -15,7 +15,7 @@ def valid_parentheses(s: str) -> bool:
     # --------------------------------
 
 # --------------------------------------------------------------------
-# 2. Next Greater Element II (Monotonic Stack - Circular Array)
+# 2. Next Greater Element II
 # --------------------------------------------------------------------
 
 def next_greater_element_circular(nums: list[int]) -> list[int]:
@@ -26,7 +26,7 @@ def next_greater_element_circular(nums: list[int]) -> list[int]:
     # --------------------------------
 
 # --------------------------------------------------------------------
-# 3. Largest Rectangle in Histogram (Monotonic Stack - Area)
+# 3. Largest Rectangle in Histogram
 # --------------------------------------------------------------------
 
 def largest_rectangle_in_histogram(heights: list[int]) -> int:
@@ -37,7 +37,7 @@ def largest_rectangle_in_histogram(heights: list[int]) -> int:
     # --------------------------------
 
 # --------------------------------------------------------------------
-# 4. Implement Stack using Queues (Queue Constraint)
+# 4. Implement Stack using Queues
 # --------------------------------------------------------------------
 
 from collections import deque
@@ -51,7 +51,7 @@ class MyStack:
     # --------------------------------
 
 # --------------------------------------------------------------------
-# 5. Implement Queue using Stacks (Stack Constraint)
+# 5. Implement Queue using Stacks
 # --------------------------------------------------------------------
 
 class MyQueue:
@@ -63,7 +63,7 @@ class MyQueue:
     # --------------------------------
 
 # --------------------------------------------------------------------
-# 6. Sliding Window Maximum (Deque)
+# 6. Sliding Window Maximum
 # --------------------------------------------------------------------
 
 def sliding_window_maximum(nums: list[int], k: int) -> list[int]:
@@ -74,7 +74,7 @@ def sliding_window_maximum(nums: list[int], k: int) -> list[int]:
     # --------------------------------
 
 # --------------------------------------------------------------------
-# 7. Evaluate Reverse Polish Notation (RPN) (Stack for Evaluation)
+# 7. Evaluate Reverse Polish Notation (RPN)
 # --------------------------------------------------------------------
 
 def eval_rpn(tokens: list[str]) -> int:
@@ -85,7 +85,7 @@ def eval_rpn(tokens: list[str]) -> int:
     # --------------------------------
 
 # --------------------------------------------------------------------
-# 8. Decode String (Stack for State Management)
+# 8. Decode String
 # --------------------------------------------------------------------
 
 def decode_string(s: str) -> str:
