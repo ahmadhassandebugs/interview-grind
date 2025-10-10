@@ -110,7 +110,7 @@ print(f"Empty: {valid_parentheses('')}")           # Expected: True
 print("\n--- 2. Next Greater Element II (Circular) ---")
 print(f"[1,2,1]: {next_greater_element_circular([1, 2, 1])}") # Expected: [2, -1, 2]
 print(f"[5,4,3,2,1]: {next_greater_element_circular([5, 4, 3, 2, 1])}") # Expected: [-1, 5, 5, 5, 5]
-print(f"[1,8,2,6,3]: {next_greater_element_circular([1, 8, 2, 6, 3])}") # Expected: [8, -1, 6, -1, 8]
+print(f"[1,8,2,6,3]: {next_greater_element_circular([1, 8, 2, 6, 3])}") # Expected: [8, -1, 6, 8, 8]
 
 print("\n--- 3. Largest Rectangle in Histogram ---")
 print(f"[2,1,5,6,2,3]: {largest_rectangle_in_histogram([2, 1, 5, 6, 2, 3])}") # Expected: 10
