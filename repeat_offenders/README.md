@@ -78,3 +78,13 @@ Practiced on
 Practiced on
 - 10/09/2025 60 mins
   - Needs more practice. Doesn't come naturally.
+
+## Heap (Priority Queue)
+
+Practiced on
+- 
+
+## Interval
+
+Practiced on
+- 
