@@ -153,32 +153,38 @@ class MedianFinder:
         self.lower = []  # max-heap via negatives
         self.upper = []  # min-heap
 
-    def addNum(self, num: int) -> None:
-        """Add a number into the data structure."""
-        if len(self.lower) == 0:
-            self.lower.append(-num)
-            return
-        if len(self.upper) == 0:
-            self.upper.append(num)
-            return
+    # def addNum(self, num: int) -> None:
+    #     """Add a number into the data structure."""
+    #     if len(self.lower) == 0:
+    #         self.lower.append(-num)
+    #         return
+    #     if len(self.upper) == 0:
+    #         self.upper.append(num)
+    #         return
         
-        if len(self.lower) == len(self.upper):
-            if num >= self.upper[0]:
-                top = heapq.heappop(self.upper)
-                heapq.heappush(self.lower, -top)
-                heapq.heappush(self.upper, num)
-            else: heapq.heappush(self.lower, -num)
-        else:
-            if num <= -self.lower[0]:
-                top = -heapq.heappop(self.lower)
-                heapq.heappush(self.upper, top)
-                heapq.heappush(self.lower, -num)
-            else: heapq.heappush(self.upper, num)
+    #     if len(self.lower) == len(self.upper):
+    #         if num >= self.upper[0]:
+    #             top = heapq.heappop(self.upper)
+    #             heapq.heappush(self.lower, -top)
+    #             heapq.heappush(self.upper, num)
+    #         else: heapq.heappush(self.lower, -num)
+    #     else:
+    #         if num <= -self.lower[0]:
+    #             top = -heapq.heappop(self.lower)
+    #             heapq.heappush(self.upper, top)
+    #             heapq.heappush(self.lower, -num)
+    #         else: heapq.heappush(self.upper, num)
+    
+    def addNum(self, num: int) -> None:
+        heapq.heappush(self.lower, -num)
+        heapq.heappush(self.upper, -heapq.heappop(self.lower))
+        if len(self.upper) > len(self.lower):
+            heapq.heappush(self.lower, -heapq.heappop(self.upper))
         
     def findMedian(self) -> float:
         """Return the current median."""
-        if len(self.lower) == len(self.upper): return (-self.lower[0] + self.upper[0]) / 2
-        else: return -self.lower[0]
+        if len(self.lower) == len(self.upper): return (-self.lower[0] + self.upper[0]) / 2.0
+        else: return -float(self.lower[0])
 
 
 # ---------------------------
@@ -197,8 +203,23 @@ def min_meeting_rooms(intervals: List[List[int]]) -> int:
     Example:
       [[0,30],[5,10],[15,20]] -> 2
     """
-    raise NotImplementedError
-
+    # Brute-force: Go over all meetings and find if it overlaps with any other
+    #              O(n^2) time; O(1) space
+    # Min-heap: Sort by start time O(n.logn). Use min-heap of end times. So, every 
+    #           time we want to check if any room is free or not, simply check the 
+    #           topmost element of the min heap as that would be the room that would 
+    #           get free the earliest out of all the other rooms currently occupied.
+    #           If top room ain't free, we can allocate another room.
+    #           O(n.logn) time; O(n) space
+    
+    intervals.sort(key=lambda x: x[0])  # sort by start time
+    rooms = [intervals[0][1]]  # add first meeting to the heap
+    
+    for i in intervals[1:]:
+        if i[0] >= rooms[0]:  # if a root is vacant
+            heapq.heappop(rooms)
+        heapq.heappush(rooms, i[1])  # room needed no matter free or not
+    return len(rooms)
 
 def reorganize_string(s: str) -> str:
     """
@@ -213,7 +234,40 @@ def reorganize_string(s: str) -> str:
       "aab" -> "aba"
       "aaab" -> ""
     """
-    raise NotImplementedError
+    # Brute-force: We can check all n! permutations.
+    #              O(n.n!) time; O(1) space
+    # Max-heap: Use max-heap by counts and greedily pick the top
+    #           two different chars each time.
+    #           Until the heap len > 1, pick top two, update
+    #           counts in heap and make string. If there's only one char
+    #           left in the end and it has >1 count, return empty string.
+    #           O(n.logk) time; O(n) space
+    
+    from collections import Counter
+    heap = [(-val, key) for (key, val) in Counter(s).items()]
+    heapq.heapify(heap)
+    res = []
+    
+    while len(heap) > 1:
+        c1, ch1 = heapq.heappop(heap)
+        c2, ch2 = heapq.heappop(heap)
+        res.append(ch1)
+        res.append(ch2)
+        c1 += 1  # counts are negative; +1 moves toward 0
+        c2 += 1
+        if c1 < 0:
+            heapq.heappush(heap, (c1, ch1))
+        if c2 < 0:
+            heapq.heappush(heap, (c2, ch2))
+    
+    if not heap:
+        return ''.join(res)
+    # one char left
+    c, ch = heap[0]
+    if c == -1:
+        res.append(ch)
+        return ''.join(res)
+    return ""
 
 
 # ---------------------------
