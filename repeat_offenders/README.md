@@ -40,6 +40,7 @@ Practiced on
     - pay attention to array indices and loop conditions. `nums[l:r]` should be used `r <= len(nums)`, not `<` size.
 - 09/29/2025 25 mins (can be shortened more)
   - practice longest_substr_k_distinct and min_subarray_len (done)
+- 10/18/2025 19 mins
 
 ## Recursion
 
