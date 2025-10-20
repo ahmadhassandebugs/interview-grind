@@ -73,6 +73,8 @@ Practiced on
 Practiced on
 - 10/10/2025 55 mins
   - sliding window needs more practice but it's a hard question
+- 10/19/2025
+  - sliding window needs more practice
 
 ## Dynamic Programming
 
