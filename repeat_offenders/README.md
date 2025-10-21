@@ -25,6 +25,7 @@ Practiced on
         - when inserting nodes at the head is possible (no special casing), e.g., merge two lists
         - when simplifying uniform operations, i.e., remove special casing
 - 09/28/2025 20 mins
+- 10/20/2025
 
 ## Two Pointer
 
